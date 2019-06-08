@@ -13,21 +13,34 @@
   {{ if gt $authorLen 0 }}
   <div>
     {{ partial "page_metadata_authors" $ }}
+    {{ if (eq $.Type "publication") }}
+    ({{- $.Date.Format "2006" -}}).
+    {{ end }}
   </div>
   {{ end }}
   {{ end }}
 
-  {{ if not (in (slice "talk" "page") $.Type) }}
+  {{ if not (in (slice "talk" "page" "publication") $.Type) }}
   <span class="article-date">
     {{ $date := $.Lastmod.Format $.Site.Params.date_format }}
     {{ if eq $.Type "publication" }}
-      {{ $date = $.Date.Format ($.Site.Params.publications.date_format | default "January, 2006") }}
+      {{ $date = $.Date.Format ($.Site.Params.publications.date_format | default "2006") }}
     {{ else }}
       {{ if ne $.Params.Lastmod $.Params.Date }}
           {{ i18n "last_updated" }}
       {{ end }}
     {{ end }}
     <time>{{ $date }}</time>
+  </span>
+  {{ end }}
+
+  {{ if (eq $.Type "publication") }}
+  <span class="pub-publication">
+    {{ if $.Params.publication_short }}
+      {{ $.Params.publication_short | markdownify }}.
+    {{ else if $.Params.publication }}
+      {{ $.Params.publication | markdownify }}.
+    {{ end }}
   </span>
   {{ end }}
 
