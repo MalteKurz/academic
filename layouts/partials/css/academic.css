@@ -119,7 +119,10 @@ a:focus {
   color: {{ .Get "link_hover" }};
 }
 
-img,
+img {
+  white-space: nowrap;
+}
+
 video {
   height: auto;
   max-width: 100%;
@@ -135,6 +138,7 @@ video {
 .img-responsive {
   /* Extend Bootstrap declaration with centering. */
   margin: 0 auto;
+  width: 100%;
 }
 
 figcaption {
@@ -769,6 +773,11 @@ ul.ul-edu li .description p.institution {
   color: rgba(0,0,0,0.6);
 }
 
+ul.ul-edu li .description p.thesis {
+  font-size: 0.75rem;
+  color: rgba(0,0,0,0.6);
+}
+
 /*************************************************
  *  People widget
  **************************************************/
@@ -1306,12 +1315,11 @@ article .article-metadata {
 }
 
 .project-card {
-  position: relative;
-  width: calc(33.3% - 2*20px); /* Fluid 3 columns (inc. 20px gutter) */
+  width: 100%; /* 1 column */
 }
 @media screen and (max-width: 1199px) {
   .project-card {
-    width: calc(50% - 20px); /* Fluid 2 columns (inc. 20px gutter) */
+    width: 100%; /* 1 column */
   }
 }
 @media screen and (max-width: 768px) {
@@ -1351,7 +1359,7 @@ article .article-metadata {
 /*************************************************
  *  Accomplishments
  **************************************************/
- 
+
 .course {
   margin-bottom: -0.5rem;
 }
